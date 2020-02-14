@@ -1,0 +1,62 @@
+-- ============================================================================
+-- modules
+-- ============================================================================
+local mathutils = self and require("mathutils") or nil
+local typeutils = self and require("typeutils") or nil
+
+-- ============================================================================
+-- constants
+-- ============================================================================
+FUSE_NAME = "MathSubtract"
+DATATYPE = "Number"
+
+-- ============================================================================
+-- fuse
+-- ============================================================================
+FuRegisterClass(FUSE_NAME, CT_Tool, {
+    REGID_DataType = DATATYPE,
+    REGID_InputDataType = DATATYPE,
+    REG_NoCommonCtrls = true,
+    REGS_Category = "Vonk\\Math",
+    REGS_Name = FUSE_NAME,
+    REGS_OpDescription = "Subtracts two numbers.",
+    REGS_OpIconString = FUSE_NAME
+})
+
+function Create()
+    -- [[ Creates the user interface. ]]
+    InNumber1 = self:AddInput("Number1" , "Number1" , {
+        LINKID_DataType = "Number",
+        INPID_InputControl = "SliderControl",
+        LINK_Main = 1,
+        ICD_Width = 0.5,
+        INP_MinScale = 1,
+        INP_MaxScale = 100,
+        INP_Default = 0
+    })
+
+    InNumber2 = self:AddInput("Number2" , "Number2" , {
+        LINKID_DataType = "Number",
+        INPID_InputControl = "SliderControl",
+        LINK_Main = 2,
+        ICD_Width = 0.5,
+        INP_MinScale = 1,
+        INP_MaxScale = 100,
+        INP_Default = 0
+    })
+
+    OutNumber = self:AddOutput("Output", "Output", {
+        LINKID_DataType = "Number",
+        LINK_Main = 1
+    })
+end
+
+function Process(req)
+    -- [[ Creates the output. ]]
+    local n1 = InNumber1:GetValue(req).Value
+    local n2 = InNumber2:GetValue(req).Value
+
+    local result = mathutils.subtract(n1, n2)
+    local fu_number = typeutils.to_fusion_number(result)
+    OutNumber:Set(req, fu_number)
+end

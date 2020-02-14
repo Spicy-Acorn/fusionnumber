@@ -21,7 +21,7 @@ function mathutils.subtract(n1, n2)
     --[[
         Subtracts two numbers.
 
-        :param n1: Number to subtract to.
+        :param n1: Number to subtract from.
         :type n1: number
 
         :param n2: Number to subtract with.
@@ -30,6 +30,22 @@ function mathutils.subtract(n1, n2)
         :rtype: number
     ]]
     local result = n1 - n2
+    return result
+end
+
+function mathutils.multiply(n1, n2)
+    --[[
+        Subtracts two numbers.
+
+        :param n1: Number to multiply.
+        :type n1: number
+
+        :param n2: Number to multiply with.
+        :type n2: number
+
+        :rtype: number
+    ]]
+    local result = n1 * n2
     return result
 end
 

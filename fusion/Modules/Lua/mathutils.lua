@@ -35,7 +35,7 @@ end
 
 function mathutils.multiply(n1, n2)
     --[[
-        Subtracts two numbers.
+        Multiplies two numbers.
 
         :param n1: Number to multiply.
         :type n1: number
@@ -46,6 +46,22 @@ function mathutils.multiply(n1, n2)
         :rtype: number
     ]]
     local result = n1 * n2
+    return result
+end
+
+function mathutils.divide(n1, n2)
+    --[[
+        Divides two numbers.
+
+        :param n1: Number to divide.
+        :type n1: number
+
+        :param n2: Number to divide with.
+        :type n2: number
+
+        :rtype: number
+    ]]
+    local result = n1 / n2
     return result
 end
 

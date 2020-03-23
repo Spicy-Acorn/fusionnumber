@@ -1,13 +1,12 @@
 -- ============================================================================
 -- modules
 -- ============================================================================
-local mathutils = self and require("mathutils") or nil
-local typeutils = self and require("typeutils") or nil
+local numberutils = self and require("numberutils") or nil
 
 -- ============================================================================
 -- constants
 -- ============================================================================
-FUSE_NAME = "MathDivide"
+FUSE_NAME = "NumberAdd"
 DATATYPE = "Number"
 
 -- ============================================================================
@@ -17,9 +16,9 @@ FuRegisterClass(FUSE_NAME, CT_Tool, {
     REGID_DataType = DATATYPE,
     REGID_InputDataType = DATATYPE,
     REG_NoCommonCtrls = true,
-    REGS_Category = "Vonk\\Math",
+    REGS_Category = "Vonk\\Number",
     REGS_Name = FUSE_NAME,
-    REGS_OpDescription = "Divides two numbers.",
+    REGS_OpDescription = "Adds two numbers.",
     REGS_OpIconString = FUSE_NAME
 })
 
@@ -56,7 +55,7 @@ function Process(req)
     local n1 = InNumber1:GetValue(req).Value
     local n2 = InNumber2:GetValue(req).Value
 
-    local result = mathutils.divide(n1, n2)
-    local fu_number = typeutils.to_fusion_number(result)
-    OutNumber:Set(req, fu_number)
+    local result = numberutils.add(n1, n2)
+    local out = Number(result)
+    OutNumber:Set(req, out)
 end

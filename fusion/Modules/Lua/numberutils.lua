@@ -1,7 +1,7 @@
 -- module table
-local mathutils = {}
+local numberutils = {}
 
-function mathutils.add(n1, n2)
+function numberutils.add(n1, n2)
     --[[
         Adds two numbers.
 
@@ -17,7 +17,7 @@ function mathutils.add(n1, n2)
     return result
 end
 
-function mathutils.subtract(n1, n2)
+function numberutils.subtract(n1, n2)
     --[[
         Subtracts two numbers.
 
@@ -33,7 +33,7 @@ function mathutils.subtract(n1, n2)
     return result
 end
 
-function mathutils.multiply(n1, n2)
+function numberutils.multiply(n1, n2)
     --[[
         Multiplies two numbers.
 
@@ -49,7 +49,7 @@ function mathutils.multiply(n1, n2)
     return result
 end
 
-function mathutils.divide(n1, n2)
+function numberutils.divide(n1, n2)
     --[[
         Divides two numbers.
 
@@ -66,4 +66,4 @@ function mathutils.divide(n1, n2)
 end
 
 -- return module table
-return mathutils
+return numberutils

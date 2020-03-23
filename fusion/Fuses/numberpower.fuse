@@ -1,0 +1,56 @@
+-- ============================================================================
+-- constants
+-- ============================================================================
+FUSE_NAME = "NumberPower"
+DATATYPE = "Number"
+
+-- ============================================================================
+-- fuse
+-- ============================================================================
+FuRegisterClass(FUSE_NAME, CT_Tool, {
+    REGID_DataType = DATATYPE,
+    REGID_InputDataType = DATATYPE,
+    REG_NoCommonCtrls = true,
+    REGS_Category = "Vonk\\Number",
+    REGS_Name = FUSE_NAME,
+    REGS_OpDescription = "Returns the power of a number.",
+    REGS_OpIconString = FUSE_NAME
+})
+
+function Create()
+    -- [[ Creates the user interface. ]]
+    InBase = self:AddInput("Base" , "Base" , {
+        LINKID_DataType = "Number",
+        INPID_InputControl = "SliderControl",
+        LINK_Main = 1,
+        INP_MinScale = -100,
+        INP_MaxScale = 100,
+        INP_Default = 0,
+        INP_Integer = false
+    })
+
+    InExponent = self:AddInput("Exponent" , "Exponent" , {
+        LINKID_DataType = "Number",
+        INPID_InputControl = "SliderControl",
+        LINK_Main = 2,
+        INP_MinScale = -100,
+        INP_MaxScale = 100,
+        INP_Default = 0,
+        INP_Integer = false
+    })
+
+    OutNumber = self:AddOutput("Output", "Output", {
+        LINKID_DataType = "Number",
+        LINK_Main = 1
+    })
+end
+
+function Process(req)
+    -- [[ Creates the output. ]]
+    local b = InBase:GetValue(req).Value
+    local e = InExponent:GetValue(req).Value
+
+    local result = math.pow(b, e)
+    local out = Number(result)
+    OutNumber:Set(req, out)
+end

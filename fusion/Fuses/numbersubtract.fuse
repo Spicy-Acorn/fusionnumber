@@ -1,9 +1,4 @@
 -- ============================================================================
--- modules
--- ============================================================================
-local numberutils = self and require("numberutils") or nil
-
--- ============================================================================
 -- constants
 -- ============================================================================
 FUSE_NAME = "NumberSubtract"
@@ -18,7 +13,7 @@ FuRegisterClass(FUSE_NAME, CT_Tool, {
     REG_NoCommonCtrls = true,
     REGS_Category = "Vonk\\Number",
     REGS_Name = FUSE_NAME,
-    REGS_OpDescription = "Subtracts two numbers.",
+    REGS_OpDescription = "Returns the difference of two numbers.",
     REGS_OpIconString = FUSE_NAME
 })
 
@@ -28,20 +23,20 @@ function Create()
         LINKID_DataType = "Number",
         INPID_InputControl = "SliderControl",
         LINK_Main = 1,
-        ICD_Width = 0.5,
-        INP_MinScale = 1,
+        INP_MinScale = -100,
         INP_MaxScale = 100,
-        INP_Default = 0
+        INP_Default = 0,
+        INP_Integer = false
     })
 
     InNumber2 = self:AddInput("Number2" , "Number2" , {
         LINKID_DataType = "Number",
         INPID_InputControl = "SliderControl",
         LINK_Main = 2,
-        ICD_Width = 0.5,
-        INP_MinScale = 1,
+        INP_MinScale = -100,
         INP_MaxScale = 100,
-        INP_Default = 0
+        INP_Default = 0,
+        INP_Integer = false
     })
 
     OutNumber = self:AddOutput("Output", "Output", {
@@ -55,7 +50,7 @@ function Process(req)
     local n1 = InNumber1:GetValue(req).Value
     local n2 = InNumber2:GetValue(req).Value
 
-    local result = numberutils.subtract(n1, n2)
+    local result = n1 - n2
     local out = Number(result)
     OutNumber:Set(req, out)
 end

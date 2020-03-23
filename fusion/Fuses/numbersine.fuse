@@ -1,0 +1,45 @@
+-- ============================================================================
+-- constants
+-- ============================================================================
+FUSE_NAME = "NumberSine"
+DATATYPE = "Number"
+
+-- ============================================================================
+-- fuse
+-- ============================================================================
+FuRegisterClass(FUSE_NAME, CT_Tool, {
+    REGID_DataType = DATATYPE,
+    REGID_InputDataType = DATATYPE,
+    REG_NoCommonCtrls = true,
+    REGS_Category = "Vonk\\Number",
+    REGS_Name = FUSE_NAME,
+    REGS_OpDescription = " Return the sine for a number in radians.",
+    REGS_OpIconString = FUSE_NAME
+})
+
+function Create()
+    -- [[ Creates the user interface. ]]
+    InNumber = self:AddInput("Number" , "Number" , {
+        LINKID_DataType = "Number",
+        INPID_InputControl = "SliderControl",
+        LINK_Main = 1,
+        INP_MinScale = -10,
+        INP_MaxScale = 10,
+        INP_Default = 0,
+        INP_Integer = false
+    })
+
+    OutNumber = self:AddOutput("Output", "Output", {
+        LINKID_DataType = "Number",
+        LINK_Main = 1
+    })
+end
+
+function Process(req)
+    -- [[ Creates the output. ]]
+    local n = InNumber:GetValue(req).Value
+
+    local result = math.sin(n)
+    local out = Number(result)
+    OutNumber:Set(req, out)
+end

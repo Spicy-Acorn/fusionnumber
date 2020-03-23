@@ -25,8 +25,7 @@ function Create()
         LINK_Main = 1,
         INP_MinScale = -100,
         INP_MaxScale = 100,
-        INP_Default = 0,
-        INP_Integer = false
+        INP_Default = 0
     })
 
     OutNumber = self:AddOutput("Output", "Output", {

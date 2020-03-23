@@ -1,13 +1,8 @@
-FusionMath
-==========
+FusionNumber
+============
 
-FusionMath is a node based math arithmetic library for Blackmagic Design Fusion
+FusionNumber is a node based math arithmetic library for Blackmagic Design Fusion
 created by Kristof Indeherberge and Cedric Duriau.
-
-Requirements
-------------
-
-- `FusionTypes <https://github.com/cedricduriau/fusiontypes>`_
 
 Installation
 ------------
@@ -21,12 +16,12 @@ Contents
 
 **Fuses**
 
-- mathadd.fuse: Fuse to add two numbers.
-- mathdivide.fuse: Fuse to divide two numbers.
-- mathmultiply.fuse: Fuse to multiply two numbers.
-- mathsubtract.fuse: Fuse to subtract two numbers.
+- numberadd.fuse: Fuse to add two numbers.
+- numberdivide.fuse: Fuse to divide two numbers.
+- numbermultiply.fuse: Fuse to multiply two numbers.
+- numbersubtract.fuse: Fuse to subtract two numbers.
 
 
 **Modules/Lua**
 
-- mathutils.lua: Core module for mathematical arithmetic.
+- numberutils.lua: Core module for mathematical arithmetic.

@@ -7,7 +7,7 @@ local matrix = self and require("matrix") or nil
 -- ============================================================================
 -- constants
 -- ============================================================================
-FUSE_NAME = "NumberFromVector"
+FUSE_NAME = "NumberFromMatrix"
 DATATYPE = "Number"
 
 -- ============================================================================
@@ -25,7 +25,7 @@ FuRegisterClass(FUSE_NAME, CT_Tool, {
 
 function Create()
     -- [[ Creates the user interface. ]]
-    InVector = self:AddInput("Input", "Input", {
+    InMatrix = self:AddInput("Input", "Input", {
         LINKID_DataType = "Text",
         INPID_InputControl = "TextEditControl",
         TEC_Wrap = true,
@@ -92,7 +92,7 @@ end
 
 function Process(req)
     -- [[ Creates the output. ]]
-    local mat_str = InVector:GetValue(req).Value
+    local mat_str = InMatrix:GetValue(req).Value
     local row = InRow:GetValue(req).Value
     local col = InColumn:GetValue(req).Value
 

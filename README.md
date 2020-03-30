@@ -17,6 +17,7 @@ FusionNumber is a node based math arithmetic library for Blackmagic Design Fusio
 
 **Fuses**
 
+- `numbercreate.fuse`: Fuse to create a Fusion Number object.
 - `numberadd.fuse`: Fuse to calculate the sum of two numbers.
 - `numbersubtract.fuse`: Fuse to calculate the difference of two numbers.
 - `numbermultiply.fuse`: Fuse to calculate the product of two numbers.

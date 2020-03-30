@@ -1,0 +1,42 @@
+-- ============================================================================
+-- constants
+-- ============================================================================
+FUSE_NAME = "NumberCreate"
+DATATYPE = "Number"
+
+-- ============================================================================
+-- fuse
+-- ============================================================================
+FuRegisterClass(FUSE_NAME, CT_Tool, {
+    REGID_DataType = DATATYPE,
+    REGID_InputDataType = DATATYPE,
+    REG_NoCommonCtrls = true,
+    REGS_Category = "Vonk\\Number",
+    REGS_Name = FUSE_NAME,
+    REGS_OpDescription = "Create a Fusion Number object.",
+    REGS_OpIconString = FUSE_NAME
+})
+
+function Create()
+    -- [[ Creates the user interface. ]]
+    InNumber = self:AddInput("Number" , "Number" , {
+        LINKID_DataType = "Number",
+        INPID_InputControl = "SliderControl",
+        TEC_Lines = 1,
+        INP_MinScale = -100,
+        INP_MaxScale = 100,
+        INP_Default = 0
+    })
+
+    Output = self:AddOutput("Output" , "Output" , {
+        LINKID_DataType = "Number",
+        LINK_Main = 1
+    })
+end
+
+function Process(req)
+    -- [[ Creates the output. ]]
+    local num = InNumber:GetValue(req).Value
+    local out = Number(num)
+    Output:Set(req, out)
+end

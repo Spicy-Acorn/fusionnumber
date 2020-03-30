@@ -68,8 +68,8 @@ function NotifyChanged(inp, param, time)
     if inp == InShowInput then
         local visible
         if param.Value == 1.0 then visible = true else visible = false end
-        InNumber1:SetAttrs({LINK_Visible = visible})
-        InNumber2:SetAttrs({LINK_Visible = visible})
+        InBase:SetAttrs({LINK_Visible = visible})
+        InExponent:SetAttrs({LINK_Visible = visible})
     end
 end
 

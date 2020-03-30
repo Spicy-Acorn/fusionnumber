@@ -19,7 +19,7 @@ FuRegisterClass(FUSE_NAME, CT_Tool, {
 
 function Create()
     -- [[ Creates the user interface. ]]
-    InNumber = self:AddInput("Number" , "Number" , {
+    InRadicand = self:AddInput("Radicand" , "Radicand" , {
         LINKID_DataType = "Number",
         INPID_InputControl = "SliderControl",
         LINK_Main = 1,
@@ -59,13 +59,13 @@ function NotifyChanged(inp, param, time)
     if inp == InShowInput then
         local visible
         if param.Value == 1.0 then visible = true else visible = false end
-        InNumber:SetAttrs({LINK_Visible = visible})
+        InRadicand:SetAttrs({LINK_Visible = visible})
     end
 end
 
 function Process(req)
     -- [[ Creates the output. ]]
-    local n = InNumber:GetValue(req).Value
+    local n = InRadicand:GetValue(req).Value
 
     local result = math.sqrt(n)
     local out = Number(result)

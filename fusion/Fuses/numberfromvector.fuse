@@ -86,12 +86,13 @@ function Process(req)
     -- build vector from interchangeable string format
     local vec = matrixutils.matrix_from_string(vec_str)
 
-    -- get number
+    -- validate column in vector
     local vec_size = table.getn(vec[1])
     if col > vec_size then
         error(string.format("column %d not in vector of size %d", col, vec_size))
     end
 
+    -- get number
     local n = vec[1][col]
     local out = Number(n)
 

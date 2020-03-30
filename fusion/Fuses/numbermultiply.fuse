@@ -19,7 +19,7 @@ FuRegisterClass(FUSE_NAME, CT_Tool, {
 
 function Create()
     -- [[ Creates the user interface. ]]
-    InNumber1 = self:AddInput("Number1" , "Number1" , {
+    InFactor1 = self:AddInput("Factor1" , "Factor1" , {
         LINKID_DataType = "Number",
         INPID_InputControl = "SliderControl",
         LINK_Main = 1,
@@ -28,7 +28,7 @@ function Create()
         INP_Default = 0
     })
 
-    InNumber2 = self:AddInput("Number2" , "Number2" , {
+    InFactor2 = self:AddInput("Factor2" , "Factor2" , {
         LINKID_DataType = "Number",
         INPID_InputControl = "SliderControl",
         LINK_Main = 2,
@@ -68,15 +68,15 @@ function NotifyChanged(inp, param, time)
     if inp == InShowInput then
         local visible
         if param.Value == 1.0 then visible = true else visible = false end
-        InNumber1:SetAttrs({LINK_Visible = visible})
-        InNumber2:SetAttrs({LINK_Visible = visible})
+        InFactor1:SetAttrs({LINK_Visible = visible})
+        InFactor2:SetAttrs({LINK_Visible = visible})
     end
 end
 
 function Process(req)
     -- [[ Creates the output. ]]
-    local n1 = InNumber1:GetValue(req).Value
-    local n2 = InNumber2:GetValue(req).Value
+    local n1 = InFactor1:GetValue(req).Value
+    local n2 = InFactor2:GetValue(req).Value
 
     local result = n1 * n2
     local out = Number(result)

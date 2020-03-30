@@ -11,7 +11,7 @@ FuRegisterClass(FUSE_NAME, CT_Tool, {
     REGID_DataType = DATATYPE,
     REGID_InputDataType = DATATYPE,
     REG_NoCommonCtrls = true,
-    REGS_Category = "Vonk\\Type",
+    REGS_Category = "Vonk\\Number",
     REGS_Name = FUSE_NAME,
     REGS_OpDescription = "Create a Fusion Number object.",
     REGS_OpIconString = FUSE_NAME

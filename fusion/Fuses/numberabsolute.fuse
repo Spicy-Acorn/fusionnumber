@@ -1,0 +1,73 @@
+-- ============================================================================
+-- constants
+-- ============================================================================
+FUSE_NAME = "NumberAbsolute"
+DATATYPE = "Number"
+
+-- ============================================================================
+-- fuse
+-- ============================================================================
+FuRegisterClass(FUSE_NAME, CT_Tool, {
+    REGID_DataType = DATATYPE,
+    REGID_InputDataType = DATATYPE,
+    REG_NoCommonCtrls = true,
+    REGS_Category = "Vonk\\Number",
+    REGS_Name = FUSE_NAME,
+    REGS_OpDescription = "Returns the absolute value of a number",
+    REGS_OpIconString = FUSE_NAME
+})
+
+function Create()
+    -- [[ Creates the user interface. ]]
+    InNumber = self:AddInput("Number" , "Number" , {
+        LINKID_DataType = "Number",
+        INPID_InputControl = "SliderControl",
+        LINK_Main = 1,
+        INP_MinScale = -100,
+        INP_MaxScale = 100,
+        INP_Default = 0
+    })
+
+    InShowInput = self:AddInput("Show Input", "ShowInput", {
+        LINKID_DataType = "Number",
+        INPID_InputControl = "CheckboxControl",
+        INP_Integer = true,
+        INP_Default = 1.0,
+        INP_External = false,
+        INP_DoNotifyChanged = true
+    })
+
+    OutNumber = self:AddOutput("Output", "Output", {
+        LINKID_DataType = "Number",
+        LINK_Main = 1
+    })
+end
+
+function NotifyChanged(inp, param, time)
+    --[[
+        Handles all input control events.
+
+        :param inp: Input that triggered a signal.
+        :type inp: Input
+
+        :param param: Parameter object holding the (new) value.
+        :type param: Parameter
+
+        :param time: Current frame number.
+        :type time: float
+    ]]
+    if inp == InShowInput then
+        local visible
+        if param.Value == 1.0 then visible = true else visible = false end
+        InNumber:SetAttrs({LINK_Visible = visible})
+    end
+end
+
+function Process(req)
+    -- [[ Creates the output. ]]
+    local n = InNumber:GetValue(req).Value
+
+    local result = math.abs(n)
+    local out = Number(result)
+    OutNumber:Set(req, out)
+end

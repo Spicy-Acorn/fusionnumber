@@ -1,0 +1,59 @@
+-- ============================================================================
+-- modules
+-- ============================================================================
+local matrixutils = self and require("matrixutils") or nil
+local json = self and require("dkjson") or nil
+
+-- ============================================================================
+-- constants
+-- ============================================================================
+FUSE_NAME = "NumberFromArray"
+DATATYPE = "Number"
+
+-- ============================================================================
+-- fuse
+-- ============================================================================
+FuRegisterClass(FUSE_NAME, CT_Tool, {
+    REGID_DataType = DATATYPE,
+    REGID_InputDataType = DATATYPE,
+    REG_NoCommonCtrls = true,
+    REGS_Category = "Vonk\\Number",
+    REGS_Name = FUSE_NAME,
+    REGS_OpDescription = "Creates a Number from an array.",
+    REGS_OpIconString = FUSE_NAME
+})
+
+function Create()
+    -- [[ Creates the user interface. ]]
+    InData = self:AddInput("Input", "Input", {
+        LINKID_DataType = "Text",
+        LINK_Main = 1
+    })
+
+    InIndex = self:AddInput("Index", "Index", {
+        LINKID_DataType = "Number",
+        INPID_InputControl = "SliderControl",
+        INP_Default = 1,
+        INP_Integer = true,
+        INP_MinScale = 1,
+        INP_MaxScale = 4,
+        INP_MinAllowed = 1
+    })
+
+    OutData = self:AddOutput("Output", "Output", {
+        LINKID_DataType = "Number",
+        --INPID_InputControl = "TextEditControl",
+        LINK_Main = 1
+    })
+end
+
+function Process( req )
+    -- [[ Creates the output. ]]
+    local array_str = InData:GetValue(req).Value
+    local array = json.decode(array_str)
+    local index = InIndex:GetValue(req).Value
+
+    local out = Number( array[index] )
+
+    OutData:Set(req, out)
+end
